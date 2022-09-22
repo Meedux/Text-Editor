@@ -179,21 +179,27 @@ const MenuBar = ({editor}) => {
               onClick={() => editor.chain().focus().toggleBulletList().run()}
               className='btn'
             >
-              <AiOutlineUnorderedList size={25} />
+              <i>
+                <AiOutlineUnorderedList size={25} />
+              </i>
             </button>
 
             <button 
               onClick={() => editor.chain().focus().toggleOrderedList().run()}
               className='btn'
             >
-              <AiOutlineOrderedList size={25} />
+              <i>
+                <AiOutlineOrderedList size={25} />
+              </i>
             </button>
 
             <button 
               onClick={() => editor.chain().focus().toggleTaskList().run()}
               className='btn'
             >
-              <BsListTask size={25} />
+              <i>
+                <BsListTask size={25} />
+              </i>
             </button>
 
             {/* NON-Existent LMAOOOOO */}
@@ -213,21 +219,27 @@ const MenuBar = ({editor}) => {
               onClick={() => editor.chain().focus().toggleCode().run()}
               className='btn'
             >
+              <i>
               <FiCode size={25} />
+              </i>
             </button> 
             
             <button 
               onClick={() => editor.chain().focus().toggleCodeBlock().run()}
               className='btn'
             >
-              <BiCodeBlock size={25} />
+              <i>
+                <BiCodeBlock size={25} />
+              </i>
             </button>
 
             <button 
               onClick={() => editor.chain().focus().toggleBlockquote().run()}
               className='btn'
             >
+              <i>
               <FaQuoteLeft size={25} />
+              </i>
             </button>
 
 

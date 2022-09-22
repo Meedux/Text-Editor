@@ -1,12 +1,18 @@
 import React from 'react'
 import Main from '../components/Main'
-import Minified from '../components/Minified'
+import Link from 'next/link'
+
 
 const index = () => {
   return (
     <>
-        {/* <Main /> */}
-        <Minified />
+        <Main />
+
+        <div className='mt-10'>
+          <Link href={'/mini'}>
+            <a className='p-2 bg-black text-input-gray'>Minimal Text Editor</a>
+          </Link>
+        </div>
     </>
   )
 }
