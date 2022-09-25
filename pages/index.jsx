@@ -1,18 +1,13 @@
 import React from 'react'
 import Main from '../components/Main'
 import Link from 'next/link'
+import New from '../components/New'
 
 
 const index = () => {
   return (
     <>
-        <Main />
-
-        <div className='mt-10'>
-          <Link href={'/mini'}>
-            <a className='p-2 bg-black text-input-gray'>Minimal Text Editor</a>
-          </Link>
-        </div>
+        <New />
     </>
   )
 }

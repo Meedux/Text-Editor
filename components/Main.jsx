@@ -28,8 +28,8 @@ import CodeBlock from '@tiptap/extension-code-block'
 
 const TypographyDropdown = ( { editor, setActive, isActive } ) => {
   return (
-    <Menu>
-      <Menu.Items as='div' className='relative '>
+    <Menu as='div' className='relative'>
+      <Menu.Items as='div' className='absolute flex justify-between top-8 bg-editor-white p-3 border-2 rounded-lg z-40'>
         <Menu.Item as='span'>
           {({ active }) => (
             <button 
@@ -126,13 +126,16 @@ const MenuBar = ({editor}) => {
     // const [ selectedFont, setFont ] = useState(fonts[0])
     // const [ selectedSize, setSize ] = useState(sizes[0])
 
+
+   
+
     const [ isActive, setActive ] = useState(false)
 
     return (
       <div className='h-full'>
         <div className='bg-bar-gray p-3'>
-          <div className='flex justify-center items-center'>
-            <button className={`${!isActive ? 'btn-active' : 'btn'}`}>
+          <div className='flex justify-center items-center '>
+            <button className={`btn`}>
               <TypographyDropdown editor={editor} setActive={setActive} isActive={isActive}/>
             </button>
 
@@ -247,12 +250,9 @@ const MenuBar = ({editor}) => {
             {/* Dropdown Menu for Fonts and Font Sizes that i have no idea how to tackle LMAOOO */}
             {/* <Listbox value={selectedFont} onChange={setFont} as="div" className='w-1/6 mr-4'>
               <div className="relative">
-                <Listbox.Button className='bg-input-gray p-2 w-full flex justify-between items-center'>
+                <Listbox.Button className='bg-input-gray '>
                   {selectedFont.name}
-                  <span>
-                    <i> <GoTriangleUp /> </i>
-                    <i> <GoTriangleDown /> </i>
-                  </span>
+                  
                 </Listbox.Button>
                 <Listbox.Options className='w-full bg-input-gray overflow-y-scroll '>
                 {fonts.map(item => (
@@ -303,6 +303,18 @@ const MenuBar = ({editor}) => {
 }
  
 const Main = () => {
+
+  const categories = [
+    { id: 1, value: "History" },
+    {value: "Science", id: 2},
+    {value: "Language", id: 3},
+    {value: "Technology", id: 4},
+    {value: "Enterntainment", id: 5},
+    {value: "Arts", id: 6},
+    {value: "Multimedia", id: 7},
+  ]
+
+  const [ cat, setCat ] = useState(categories[0])
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -334,6 +346,39 @@ const Main = () => {
         </div>
         <MenuBar editor={editor} />
         <EditorContent editor={editor}/>
+
+        <div className='mt-5 bg-input-gray p-5'>
+          <Listbox value='Categories...' onChange={setCat} as='div' className='mr-5'>
+            <div className="relative">
+              <Listbox.Button className={'bg-editor-white p-3 w-1/5 flex justify-between items-center'}>
+                {cat.value}
+                <span>
+                    <i> <GoTriangleUp /> </i>
+                    <i> <GoTriangleDown /> </i>
+                </span>
+              </Listbox.Button>
+              <Listbox.Options className='bg-editor-white w-1/5 overflow-y-scroll absolute'>
+                {categories.map(item => (
+                    <Listbox.Option
+                      key={item.id}
+                      value={item}
+                      className=' list-none'
+                      as='li'
+                    >
+                      {({ active, selected }) => (
+                        <span className={`${active ? 'bg-slate-600 text-white text-center block' : 'text-center block'}`}>
+                          {item.value}
+                        </span>
+                      )}
+                    </Listbox.Option>
+                ))}
+              </Listbox.Options>
+            </div>
+          </Listbox>
+          
+
+          {/* More Button Options! */}
+        </div>
       </div>
     </>
   )

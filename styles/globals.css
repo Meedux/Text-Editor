@@ -2,8 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 .ProseMirror {
-  @apply bg-input-gray p-5 outline-none absolute
+  @apply bg-input-gray p-5 outline-none;
 }
 
 .btn {
@@ -88,3 +90,5 @@ ul[data-type="taskList"] {
 pre {
   @apply p-2 bg-gray-900 text-editor-white rounded-lg;
 }
+
+

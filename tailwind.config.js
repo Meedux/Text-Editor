@@ -11,6 +11,7 @@ module.exports = {
         'bar-gray': '#D9D9D9',
         'editor-white': '#F9F9F9',
         'selection-gray': '#635B5B',
+        'border': '#B1B1B1'
       }
     },
   },
