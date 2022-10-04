@@ -6,9 +6,9 @@ import BulletList from '@tiptap/extension-bullet-list'
 import OrderedList from '@tiptap/extension-ordered-list'
 import Code from '@tiptap/extension-code'
 import TaskList from '@tiptap/extension-task-list'
-import { MdTextFields } from 'react-icons/md'
+import { MdAlignHorizontalCenter, MdTextFields } from 'react-icons/md'
 import { BiAlignLeft, BiAlignMiddle, BiAlignJustify, BiAlignRight, BiCodeBlock } from 'react-icons/bi'
-import { AiOutlineUnorderedList, AiOutlineOrderedList } from 'react-icons/ai'
+import { AiOutlineUnorderedList, AiOutlineOrderedList, AiOutlineBlock } from 'react-icons/ai'
 import { FiCode } from 'react-icons/fi'
 import { FaQuoteLeft } from 'react-icons/fa'
 import { Menu } from '@headlessui/react'
@@ -19,6 +19,138 @@ import Blockquote from '@tiptap/extension-blockquote'
 import CodeBlock from '@tiptap/extension-code-block'
 import { Listbox } from '@headlessui/react'
 import { GoTriangleUp, GoTriangleDown } from 'react-icons/go'
+import { HiOutlineViewList } from 'react-icons/hi'
+
+
+const TextBlock = ({ editor }) => {
+  return(
+    <>
+      <Menu>
+        <div className="relative mr-4 " >
+          <Menu.Button>
+            <AiOutlineBlock size={25}/>
+          </Menu.Button>
+          <Menu.Items className="absolute bg-slate-500 flex flex-col justify-center items-center z-50 rounded-lg" style={{transition: '300ms'}}>
+            <Menu.Item as="button" className="cursor-pointer p-3" onClick={() => editor.chain().focus().toggleCode().run()}>
+              <FiCode size={25} />
+            </Menu.Item>
+            <Menu.Item as="button" className="cursor-pointer p-3" onClick={() => editor.chain().focus().toggleBlockquote().run()}>
+              <FaQuoteLeft size={25} />
+            </Menu.Item>
+            <Menu.Item as="button" className="cursor-pointer p-3" onClick={() => editor.chain().focus().toggleCodeBlock().run()}>
+              <BiCodeBlock size={25} />
+            </Menu.Item>
+          </Menu.Items>
+        </div>
+      </Menu>
+    </>
+  )
+}
+
+
+const ListDropdown = ({ editor }) => {
+  return(
+    <>
+      <Menu>
+        <div className="relative mr-4 " >
+          <Menu.Button>
+            <HiOutlineViewList size={25} />
+          </Menu.Button>
+          <Menu.Items className="absolute bg-slate-500 flex flex-col justify-center items-center z-50 rounded-lg" style={{transition: '300ms'}}>
+            <Menu.Item as="button" className="cursor-pointer p-3" onClick={() => editor.chain().focus().toggleBulletList().run()}>
+              <AiOutlineUnorderedList size={25}/>
+            </Menu.Item>
+            <Menu.Item as="button" className="cursor-pointer p-3" onClick={() => editor.chain().focus().toggleOrderedList().run()}>
+              <AiOutlineOrderedList size={25} />
+            </Menu.Item>
+            <Menu.Item as="button" className="cursor-pointer p-3" onClick={() => editor.chain().focus().toggleTaskList().run()}>
+              <BsListTask size={25} />
+            </Menu.Item>
+          </Menu.Items>
+        </div>
+      </Menu>
+    </>
+  )
+}
+
+
+const AlignmentDropdown = ({ editor }) => {
+  return(
+    <>
+      <Menu>
+        <div className="relative mr-4 " >
+          <Menu.Button>
+            <MdAlignHorizontalCenter size={25}/>
+          </Menu.Button>
+          <Menu.Items className="absolute bg-slate-500 flex flex-col justify-center items-center z-50 rounded-lg" style={{transition: '300ms'}}>
+            <Menu.Item as="button" className="cursor-pointer p-3" onClick={() => editor.chain().focus().setTextAlign('left').run()}>
+              <BiAlignLeft size={25} />
+            </Menu.Item>
+            <Menu.Item as="button" className="cursor-pointer p-3" onClick={() => editor.chain().focus().setTextAlign('center').run()}>
+              <BiAlignMiddle size={25} />
+            </Menu.Item>
+            <Menu.Item as="button" className="cursor-pointer p-3" onClick={() => editor.chain().focus().setTextAlign('justify').run()}>
+              <BiAlignJustify size={25} />
+            </Menu.Item>
+            <Menu.Item as="button" className="cursor-pointer p-3" onClick={() => editor.chain().focus().setTextAlign('right').run()}>
+              <BiAlignRight size={25} />
+            </Menu.Item>
+          </Menu.Items>
+        </div>
+      </Menu>
+    </>
+  )
+}
+
+
+const TypographyDropdown = ({ editor }) => {
+  return(
+    <>
+      <Menu>
+        <div className="relative mr-4 " >
+          <Menu.Button>
+            <i>
+              <MdTextFields size={25} />
+            </i>
+          </Menu.Button>
+          <Menu.Items className="absolute bg-slate-500 flex flex-col justify-center items-center z-50 rounded-lg" style={{transition: '300ms'}}>
+            <Menu.Item as="button" className="cursor-pointer p-3" onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}>
+              <span className="font-bold">H1</span>
+            </Menu.Item>
+            <Menu.Item as="button" className="cursor-pointer p-3" onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}>
+              <span className="font-bold">H2</span>
+            </Menu.Item>
+            <Menu.Item as="button" className="cursor-pointer p-3" onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}>
+              <span className="font-bold">H3</span>
+            </Menu.Item>
+            <Menu.Item as="button" className="cursor-pointer p-3" onClick={() => editor.chain().focus().toggleBold().run()}>
+              <span className='font-extrabold'>Bold</span>
+            </Menu.Item>
+            <Menu.Item as="button" className="cursor-pointer p-3" onClick={() => editor.chain().focus().toggleItalic().run()}>
+              <span className='font-bold'><i>Italic</i></span>
+            </Menu.Item>
+          </Menu.Items>
+        </div>
+      </Menu>
+    </>
+  )
+}
+
+
+
+const MobileMenuBar = ({ editor }) => {
+  
+  return(
+    <>
+      <div className='bg-bar-gray p-3 justify-center items-center md:hidden flex'>
+        <TypographyDropdown editor={editor} />
+        <AlignmentDropdown editor={editor} />
+        <ListDropdown editor={editor} />
+        <TextBlock editor={editor} />
+      </div>
+    </>
+  )
+}
 
 
 const DropDown = ({ editor }) => {
@@ -84,7 +216,7 @@ const DropDown = ({ editor }) => {
 const MenuBar = ({ editor }) => {
     return(
         <>
-            <div className='bg-bar-gray p-3 flex justify-center items-center'>
+            <div className='bg-bar-gray p-3 justify-center items-center md:flex hidden'>
               <div className='border-r-2  border-r-border pr-4'>
                 <DropDown editor={editor} />
               </div>
@@ -229,6 +361,7 @@ const New = () => {
             <input type="text" placeholder='Title...' className='font-bold bg-input-gray p-4' style={{outline: 'none', width: '100%'}}/>
             </div>
             <MenuBar editor={editor} />
+            <MobileMenuBar editor={editor} />
             <EditorContent editor={editor}/>
         </div>
     </>
