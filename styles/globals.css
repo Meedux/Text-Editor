@@ -3,9 +3,17 @@
 @tailwind utilities;
 
 
+body {
+  @apply bg-bar-gray;
+}
+
+.new-container {
+  @apply container mx-auto;
+}
 
 .ProseMirror {
-  @apply bg-input-gray p-5 outline-none;
+  @apply p-5 outline-none bg-input-gray;
+  height: 100vh;
 }
 
 .btn {
@@ -22,6 +30,9 @@
   transition: 300ms;
 }
 
+.transition {
+  transition: 400ms;
+}
 
 h1 {
   @apply text-3xl font-bold
@@ -92,3 +103,13 @@ pre {
 }
 
 
+.width-70 {
+  width: 70vw;
+}
+.width-30 {
+  width: 15vw;;
+}
+
+.height-70 {
+  height: 65%;
+}
