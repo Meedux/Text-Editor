@@ -31,8 +31,45 @@ const MobileMenuBar = ({ editor }) => {
   
   return(
     <>
-      <div className='bg-bar-gray p-3 justify-center items-center md:hidden flex'>
+      <div className='bg-onyx bottom-0 p-3 justify-between items-center md:hidden flex w-full fixed'>
+        <div className="flex items-center">
+          <button 
+            onClick={() => editor.chain().focus().setParagraph().run()}
+            // className={`${editor.isActive({ textAlign: 'left' }) ? 'bg-border' : ''} p-2 border-r-2 border-r-border`}
+            className='p-1 mr-3 text-ivory hover:bg-ivory hover:text-onyx rounded-md'
+          >
+            <i>
+              <FaParagraph size={20} />
+            </i>
+          </button>
 
+          <button 
+            onClick={() => editor.chain().focus().setHeading({ level: 1 }).run()}
+            // className={`${editor.isActive({ textAlign: 'center' }) ? 'bg-border' : ''} p-2 border-r-2 border-r-border`}
+            className='p-1 mr-3 text-ivory hover:bg-ivory hover:text-onyx rounded-md'
+          >
+            <span className='font-extrabold'>H1</span>
+          </button>
+
+          <button 
+            onClick={() => editor.chain().focus().setHeading({ level: 2 }).run()}
+            // className={editor.isActive({ textAlign: 'justify' }) ? 'btn-active' : 'btn'}
+            className='p-1 mr-3 text-ivory hover:bg-ivory hover:text-onyx rounded-md'
+          >
+            <span className='font-extrabold'>H2</span>
+          </button>
+
+          <button 
+            onClick={() => editor.chain().focus().setHeading({ level: 3 }).run()}
+            className=' p-1  text-ivory hover:bg-ivory hover:text-onyx rounded-md'
+          >
+            <span className='font-extrabold'>H3</span>
+          </button>
+        </div>
+
+        <div>
+          list goes here
+        </div>
       </div>
     </>
   )
