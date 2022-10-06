@@ -13,8 +13,8 @@ import { ImUnderline } from 'react-icons/im'
 import { AiOutlineUnorderedList, AiOutlineOrderedList, AiOutlineBlock } from 'react-icons/ai'
 import { FiCode } from 'react-icons/fi'
 import { FaQuoteLeft, FaParagraph, FaBold, FaItalic, FaStrikethrough } from 'react-icons/fa'
-import { Menu } from '@headlessui/react'
-import { BsListTask, BsImageFill } from 'react-icons/bs'
+import { Menu, Transition } from '@headlessui/react'
+import { BsListTask, BsImageFill, BsThreeDotsVertical } from 'react-icons/bs'
 import TaskItem from '@tiptap/extension-task-item'
 import ListItem from '@tiptap/extension-list-item'
 import Blockquote from '@tiptap/extension-blockquote'
@@ -23,6 +23,166 @@ import { Listbox } from '@headlessui/react'
 import { GoTriangleUp, GoTriangleDown } from 'react-icons/go'
 import { HiOutlineViewList } from 'react-icons/hi'
 import Underline from '@tiptap/extension-underline'
+
+
+const MobileDropUp = ({ editor }) => {
+  return(
+    <Menu>
+      <span>  
+        <Transition
+          enter="transition duration-100 ease-out"
+          enterFrom="transform scale-95 opacity-0"
+          enterTo="transform scale-100 opacity-100"
+          leave="transition duration-75 ease-out"
+          leaveFrom="transform scale-100 opacity-100"
+          leaveTo="transform scale-95 opacity-0"
+        >
+          <Menu.Items className="p-3 absolute bg-onyx flex flex-col justify-start items-center right-0 -translate-y-full -top-7 rounded-lg">
+            <div className='flex'>
+              <button 
+                onClick={() => editor.chain().focus().setTextAlign('left').run()}
+                // className={`${editor.isActive({ textAlign: 'left' }) ? 'bg-border' : ''} p-2 border-r-2 border-r-border`}
+                className=' p-2 text-ivory hover:bg-ivory hover:text-onyx rounded-md'
+              >
+                <i>
+                  <BiAlignLeft size={24} />
+                </i>
+              </button>
+
+              <button 
+                onClick={() => editor.chain().focus().setTextAlign('center').run()}
+                // className={`${editor.isActive({ textAlign: 'center' }) ? 'bg-border' : ''} p-2 border-r-2 border-r-border`}
+                className=' p-2 text-ivory hover:bg-ivory hover:text-onyx rounded-md'
+              >
+                <i>
+                  <BiAlignMiddle size={24} />
+                </i>
+              </button>
+
+              <button 
+                onClick={() => editor.chain().focus().setTextAlign('justify').run()}
+                  // className={editor.isActive({ textAlign: 'justify' }) ? 'btn-active' : 'btn'}
+                className=' p-2 text-ivory hover:bg-ivory hover:text-onyx rounded-md'
+              >
+                <i>
+                  <BiAlignJustify size={24} />
+                </i>
+              </button>
+
+              <button 
+                onClick={() => editor.chain().focus().setTextAlign('right').run()}
+                className=' p-2 text-ivory hover:bg-ivory hover:text-onyx rounded-md'
+              >
+                <i>
+                  <BiAlignRight size={24} />
+                </i>
+              </button>
+            </div>
+
+            <div className='flex items-start w-full'>
+              <button 
+                onClick={() => editor.chain().focus().toggleBulletList().run()}
+                className=' p-2 text-ivory hover:bg-ivory hover:text-onyx rounded-md'
+              >
+                <i>
+                  <AiOutlineUnorderedList size={24} />
+                </i>
+              </button>
+
+              <button 
+                onClick={() => editor.chain().focus().toggleOrderedList().run()}
+                className=' p-2 text-ivory hover:bg-ivory hover:text-onyx rounded-md'
+              >
+                <i>
+                  <AiOutlineOrderedList size={24} />
+                </i>
+              </button>
+
+              <button 
+                onClick={() => editor.chain().focus().toggleTaskList().run()}
+                className='p-2 text-ivory hover:bg-ivory hover:text-onyx rounded-md'
+              >
+                <i>
+                  <BsListTask size={24} />
+                </i>
+              </button>
+            </div>
+
+            <div className="flex items-start w-full">
+              <button 
+                onClick={() => editor.chain().focus().toggleBold().run()}
+                className='p-2 text-ivory hover:bg-ivory hover:text-onyx rounded-md'
+              >
+                <i>
+                  <FaBold size={22} />
+                </i>
+              </button> 
+                    
+              <button 
+                onClick={() => editor.chain().focus().toggleUnderline().run()}
+                className='p-2 text-ivory hover:bg-ivory hover:text-onyx rounded-md'
+              >
+                <i>
+                  <ImUnderline size={22} />
+                </i>
+              </button>
+
+              <button 
+                onClick={() => editor.chain().focus().toggleItalic().run()}
+                className='p-2 text-ivory hover:bg-ivory hover:text-onyx rounded-md'
+              >
+                <i>
+                <FaItalic size={22} />
+                </i>
+              </button>
+
+              <button 
+                onClick={() => editor.chain().focus().toggleStrike().run()}
+                className='p-2 text-ivory hover:bg-ivory hover:text-onyx rounded-md'
+              >
+                <i>
+                  <FaStrikethrough size={22} />
+                </i>
+              </button>
+            </div>
+
+            <div className='flex items-start w-full'>
+              <button 
+                onClick={() => editor.chain().focus().toggleCode().run()}
+                className='p-2 text-ivory hover:bg-ivory hover:text-onyx rounded-md'
+              >
+                <i>
+                  <FiCode size={24} />
+                </i>
+              </button> 
+                    
+              <button 
+                onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+                className='p-2 text-ivory hover:bg-ivory hover:text-onyx rounded-md'
+              >
+                <i>
+                  <BiCodeBlock size={24} />
+                </i>
+              </button>
+
+              <button 
+                onClick={() => editor.chain().focus().toggleBlockquote().run()}
+                className='p-2 text-ivory hover:bg-ivory hover:text-onyx rounded-md'
+              >
+                <i>
+                  <FaQuoteLeft size={24} />
+                </i>
+              </button>
+            </div>
+          </Menu.Items>
+        </Transition>
+        <Menu.Button className='text-ivory hover:bg-ivory hover:text-onyx rounded-md p-1'>
+          <BsThreeDotsVertical size={20} />
+        </Menu.Button>
+      </span>
+    </Menu>
+  )
+}
 
 
 
@@ -68,7 +228,7 @@ const MobileMenuBar = ({ editor }) => {
         </div>
 
         <div>
-          list goes here
+          <MobileDropUp editor={editor}/>
         </div>
       </div>
     </>
@@ -389,13 +549,13 @@ const New = () => {
   return (
     <>
         <div className="container mx-auto">
-            <div className='mb-7 mt-7'>
+            <div className='mt-7'>
               <input type="text" placeholder='Title...' className='font-bold bg-input-gray p-4' style={{outline: 'none', width: '100%'}}/>
             </div>
             <MenuBar editor={editor} />
             <EditorContent editor={editor}/>
-            <MobileMenuBar editor={editor} />
         </div>
+        <MobileMenuBar editor={editor} />
     </>
   )
 }

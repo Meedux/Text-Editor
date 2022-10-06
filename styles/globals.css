@@ -4,7 +4,7 @@
 
 
 body {
-  @apply bg-bar-gray;
+  @apply  md:bg-bar-gray bg-input-gray;
 }
 
 .new-container {
@@ -12,7 +12,7 @@ body {
 }
 
 .ProseMirror {
-  @apply p-5 outline-none bg-input-gray;
+  @apply p-5 outline-none bg-input-gray ;
   height: 100vh;
 }
 
