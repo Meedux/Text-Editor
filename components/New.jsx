@@ -23,6 +23,10 @@ import { Listbox } from '@headlessui/react'
 import { GoTriangleUp, GoTriangleDown } from 'react-icons/go'
 import { HiOutlineViewList } from 'react-icons/hi'
 import Underline from '@tiptap/extension-underline'
+import TextStyle from '@tiptap/extension-text-style'
+import FontFamily from '@tiptap/extension-font-family'
+import Text from '@tiptap/extension-text'
+
 
 
 const MobileDropUp = ({ editor }) => {
@@ -266,7 +270,7 @@ const DropDown = ({ editor }) => {
   return (
     <Menu as="div" className='mr-4 w-full'>
       <div className="relative">
-        <Menu.Button className='bg-input-gray p-1 w-full flex justify-between items-center rounded-2xl'>
+        <Menu.Button className='bg-input-gray p-1 w-full flex justify-between items-center rounded-md'>
         {(text == "paragraph") ? <FaParagraph size={20} className='ml-2'/> : (text == "header 1") ? <span className='font-bold ml-2'>H1</span> : (text == "header 2") ? <span className='font-bold ml-2'>H2</span> : (text == "header 3") ? <span className='font-bold ml-2'>H3</span> : ";-;"}
         <span>
           <i> <GoTriangleUp size={10}/> </i>
@@ -310,6 +314,118 @@ const DropDown = ({ editor }) => {
       </Menu.Items>
       </div>
     </Menu>
+  )
+}
+
+const SizeDropDown = ({ editor }) => {
+  return(
+    <>
+
+    </>
+  )
+}
+
+const FontsDropDown = ({ editor }) => {
+
+  const [ font, setFont ] = useState('Inter')
+
+
+  function updateText(item) {
+    switch(item){
+      case "Inter":{
+        editor.chain().focus().setFontFamily('Inter').run()
+        setFont("Inter")
+        break;
+      }
+
+      case "Comic Sans":{
+        editor.chain().focus().setFontFamily('Comic Sans MS, Comic Sans').run()
+        setFont("Comic Sans")
+        break;
+      }
+
+      case "monospace": {
+        editor.chain().focus().setFontFamily('monospace').run()
+        setFont("monospace")
+        break;
+      }
+
+      case "cursive": {
+        editor.chain().focus().setFontFamily('cursive').run()
+        setFont("cursive")
+        break;
+      }
+
+      case "serif": {
+        editor.chain().focus().setFontFamily('serif').run()
+        setFont("serif")
+        break;
+      }
+    }
+  }
+
+  /*
+    Inter
+    Comic Sans MS, Comic Sans
+    monospace
+    cursive
+    serif
+  */
+  return(
+    <>
+      <Menu as="div" className='mr-4 w-full'>
+        <div className="relative">
+            <Menu.Button className="bg-input-gray px-8 p-1 w-full flex justify-between items-center rounded-md">
+              {(font == "Inter") ? <span style={{fontFamily: "Inter"}}>Inter</span> : (font == "Comic Sans") ? <span style={{fontFamily: "Comic Sans MS, Comic Sans"}}>Comic Sans</span> : (font == "monospace") ? <span style={{fontFamily: "monospace"}}>Monospace</span> : (font == "cursive") ? <span style={{fontFamily: "cursive"}}>Cursive</span> : (font == "serif") ? <span style={{fontFamily: "serif"}}>Serif</span> : ";-;"}
+              <span>
+                <i> <GoTriangleUp size={10}/> </i>
+                <i> <GoTriangleDown size={10}/> </i>
+              </span>
+            </Menu.Button>
+            <Menu.Items className='w-full bg-input-gray absolute z-50 p-0 drop-shadow-2xl mt-1'>
+              <Menu.Item as='li' className='list-none'>
+                {({ active }) => (
+                  <span className={`${active ? 'bg-slate-600 text-white text-center block' : 'bg-input-gray text-center block'} flex justify-center p-1`}  style={{fontFamily: "Inter"}} onClick={() => updateText('Inter')}>
+                    Inter
+                  </span>
+                )}
+              </Menu.Item>
+
+              <Menu.Item as='li' className='list-none'>
+                {({ active }) => (
+                  <span className={`${active ? 'bg-slate-600 text-white text-center block' : 'bg-input-gray text-center block'} flex justify-center p-1`}  style={{fontFamily: "Comic Sans MS, Comic Sans"}} onClick={() => updateText('Comic Sans')}>
+                    Comic Sans
+                  </span>
+                )}
+              </Menu.Item>
+
+              <Menu.Item as='li' className='list-none'>
+                {({ active }) => (
+                  <span className={`${active ? 'bg-slate-600 text-white text-center block' : 'bg-input-gray text-center block'} flex justify-center p-1`}  style={{fontFamily: "monospace"}} onClick={() => updateText('monospace')}>
+                    Monospace
+                  </span>
+                )}
+              </Menu.Item>
+
+              <Menu.Item as='li' className='list-none'>
+                {({ active }) => (
+                  <span className={`${active ? 'bg-slate-600 text-white text-center block' : 'bg-input-gray text-center block'} flex justify-center p-1`}  style={{fontFamily: "cursive"}} onClick={() => updateText('cursive')}>
+                    Cursive
+                  </span>
+                )}
+              </Menu.Item>
+
+              <Menu.Item as='li' className='list-none'>
+                {({ active }) => (
+                  <span className={`${active ? 'bg-slate-600 text-white text-center block' : 'bg-input-gray text-center block'} flex justify-center p-1`}  style={{fontFamily: "serif"}} onClick={() => updateText('serif')}>
+                    Serif
+                  </span>
+                )}
+              </Menu.Item>
+            </Menu.Items>
+        </div>
+      </Menu>
+    </>
   )
 }
 
@@ -485,6 +601,13 @@ const MenuBar = ({ editor }) => {
                     </button>
                   </div>
                 </div>
+
+
+                <div className='border-r-0 border-l-ivory border-l'>
+                  <div className="mx-3">
+                    <FontsDropDown editor={editor} />
+                  </div>
+                </div>
               </div>
 
               <div className='flex justify-center items-center'>
@@ -542,7 +665,10 @@ const New = () => {
       Blockquote,
       BulletList,
       OrderedList,
-      Underline
+      Underline,
+      TextStyle,
+      FontFamily,
+      Text
     ],
     content: '<p>Text Here...</p>'
   })
